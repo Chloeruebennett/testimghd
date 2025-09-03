@@ -30,7 +30,6 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     )
     return {"access_token": access_token, "token_type": "bearer"}
 
-# Регистрация
 @router.post("/register", response_model=schemas.UserRead)
 async def register(user_in: schemas.UserCreate, db: Session = Depends(get_db)):
     user = crud.get_user_by_username(db, user_in.username)
