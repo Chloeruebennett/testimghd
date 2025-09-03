@@ -5,7 +5,6 @@ from passlib.context import CryptContext
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-# Пользователи
 def get_user_by_username(db: Session, username: str):
     return db.execute(select(models.User).where(models.User.username == username)).scalar_one_or_none()
 
@@ -25,7 +24,6 @@ def authenticate_user(db: Session, username: str, password: str):
         return False
     return user
 
-# Заметки
 def create_note(db: Session, note_in: schemas.NoteCreate, owner_id: int):
     note = models.Note(**note_in.dict(), owner_id=owner_id)
     db.add(note)
